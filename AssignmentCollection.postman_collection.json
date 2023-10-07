@@ -1,0 +1,263 @@
+{
+	"info": {
+		"_postman_id": "5c747781-26c7-4240-9656-ba7e60e1b49d",
+		"name": "AssignmentCollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9238110",
+		"_collection_link": "https://speeding-satellite-817760.postman.co/workspace/New-Team-Workspace~3a8e14d8-22fa-42d3-b9f0-f9ff9821c49d/collection/9238110-5c747781-26c7-4240-9656-ba7e60e1b49d?action=share&source=collection_link&creator=9238110"
+	},
+	"item": [
+		{
+			"name": "post",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"console.info(jsonData);\r",
+							"pm.environment.set(\"idNumber\", jsonData.result.idNumber);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"firstName\": \"Gajanan\",\r\n        \"lastName\": \"Bhawale\",\r\n        \"mobileNumber\": \"9595258302\",\r\n        \"idNumber\": \"1401901212195\",\r\n        \"physicalAddress\": \"Morning Side, Sandton\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/clients",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"clients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/clients/{{idNumber}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"clients",
+						"{{idNumber}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "put",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"console.info(jsonData);\r",
+							"pm.environment.set(\"idNumber\", jsonData.result.idNumber);\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"Gajanan\",\r\n    \"lastName\": \"Bhawale\",\r\n    \"mobileNumber\": \"9595258309\",\r\n    \"idNumber\": \"1401901212199\",\r\n    \"physicalAddress\": \"Morning Side, Sandton\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/clients/{{idNumber}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"clients",
+						"{{idNumber}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get by first name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/clients/search?firstName=ga",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"clients",
+						"search"
+					],
+					"query": [
+						{
+							"key": "firstName",
+							"value": "ga"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get by ID Number",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/clients/search?idNumber={{idNumber}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"clients",
+						"search"
+					],
+					"query": [
+						{
+							"key": "idNumber",
+							"value": "{{idNumber}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get by mobile number",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/clients/search?mobileNumber=95",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"clients",
+						"search"
+					],
+					"query": [
+						{
+							"key": "mobileNumber",
+							"value": "95"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
